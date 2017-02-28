@@ -11,8 +11,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        String teste = "while i do this, if i want i can drink a coffe or do some maths like 1 + 1, 2 - 2, 3 * 3 $";
+        String teste = "while i do this, if i want i can drink a coffe while do some maths like 1 + 1, 2 - 2, 3 * 3 $";
 
-        LexicalAnalyzer.analize(teste);
+        LexicalAnalyzer.createTable(teste);
     }
 }

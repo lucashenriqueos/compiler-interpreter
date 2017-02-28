@@ -1,6 +1,5 @@
 package org.lucashos.analyzer;
 
-import org.lucashos.gramar.Keywords;
 import org.lucashos.util.TokenClass;
 import org.lucashos.util.TokenTable;
 
@@ -12,14 +11,15 @@ import java.util.List;
  */
 public class LexicalAnalyzer {
 
-    public static TokenTable analize(String sentence){
+    public static TokenTable createTable(String sentence){
         TokenTable tokenTable = new TokenTable();
         List<String> letters = Arrays.asList(sentence.split(" "));
-        int index = 0;
 
+        int line = 0;
+        int col = 0;
         for(String letter: letters) {
-            tokenTable.addToken(TokenClass.getClass(letter), letter, index);
-            index += letter.length() + 1;
+            tokenTable.addToken(TokenClass.getClass(letter), letter, line, col);
+            line += letter.length() + 1;
         }
 
         return tokenTable;

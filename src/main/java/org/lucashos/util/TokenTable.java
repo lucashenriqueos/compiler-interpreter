@@ -19,24 +19,37 @@ public class TokenTable {
         this.tokens = tokens;
     }
 
-    public Token addToken(TokenClass tokenClass, String value, int position){
+    public Token addToken(TokenClass tokenClass, String value, int line, int col){
         Token token = findToken(value);
 
         if(token == null) {
-            token = new Token(tokenClass, value, position);
-            tokens.add(token);
-            return token;
+            Integer index = tokenClass.compareTo(TokenClass.IDENTIFIER) == 0 ? findNextIndex() + 1 : null;
+            token = new Token(tokenClass, value, line, col, index);
         } else {
-            return token;
+            token = new Token(tokenClass, value, line, col, token.getIndex());
         }
+
+        tokens.add(token);
+        return token;
     }
 
-    public Token findToken(String value) {
+    private Token findToken(String value) {
         for(Token token: tokens) {
             if(token.getValue().equals(value)) {
                 return token;
             }
         }
         return null;
+    }
+
+    private Integer findNextIndex() {
+        int lastIndex = -1;
+        for(Token token: tokens) {
+            if(token.getIndex() != null && token.getIndex() > lastIndex) {
+                lastIndex = token.getIndex();
+            }
+        }
+
+        return lastIndex;
     }
 }
