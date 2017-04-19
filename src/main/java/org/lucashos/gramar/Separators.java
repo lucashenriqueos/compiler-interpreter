@@ -4,7 +4,9 @@ package org.lucashos.gramar;
  * Created by lucas on 28/02/17.
  */
 public enum Separators {
-    END_LINE("$");
+    END_LINE("$"),
+	OPEN_SCOPE("("),
+	CLOSE_SCOPE(")");
 
     private final String friendlyName;
 

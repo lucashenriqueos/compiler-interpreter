@@ -1,0 +1,7 @@
+( func teste ( tipo param1 tipo param2 ) nada
+	( int a b c )
+	( = a 0 )
+	( = b a )
+	( escreve "oi" )
+	( le a )
+)

@@ -4,10 +4,14 @@ package org.lucashos.gramar;
  * Created by lucas on 28/02/17.
  */
 public enum Keywords {
-    WHILE("while"),
-    IF("if"),
-    FOR("for"),
-    ELSE("else");
+    FUNCTION("func"),
+    INTEGER("int"),
+    FLOAT("real"),
+    TEXT("texto"),
+    BOOLEAN("logico"),
+    READ("le"),
+    PRINT("escreve"),
+    VOID("nada");
 
     private final String friendlyName;
 

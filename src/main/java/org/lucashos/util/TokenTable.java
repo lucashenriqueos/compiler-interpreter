@@ -32,6 +32,11 @@ public class TokenTable {
         tokens.add(token);
         return token;
     }
+    
+    public List<Token> addAll(List<Token> tokens) {
+    	this.tokens.addAll(tokens);
+    	return this.tokens;
+    }
 
     private Token findToken(String value) {
         for(Token token: tokens) {
@@ -52,4 +57,19 @@ public class TokenTable {
 
         return lastIndex;
     }
+
+	public List<Token> getTokens() {
+		return tokens;
+	}
+
+	public void setTokens(List<Token> tokens) {
+		this.tokens = tokens;
+	}
+
+	@Override
+	public String toString() {
+		return "TokenTable [tokens=" + tokens + "]";
+	}
+    
+    
 }

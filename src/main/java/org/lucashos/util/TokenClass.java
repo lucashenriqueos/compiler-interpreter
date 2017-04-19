@@ -8,6 +8,9 @@ import org.lucashos.gramar.Separators;
  * Created by lucas on 28/02/17.
  */
 public enum TokenClass {
+	INTEGER_LITERAL("Constante literal inteira"),
+	FLOAT_LITERAL("Constante literal real"),
+	STRING_LITERAL("Constante literal String"),
     IDENTIFIER("Identificador"),
     NUMERIC_CONSTANT("Constante numérica"),
     CHARACTERS("Cadeia de caracteres"),
@@ -26,7 +29,13 @@ public enum TokenClass {
     }
 
     public static TokenClass getClass(String letter) {
-        if(Keywords.isKeyword(letter)){
+    	if(letter.matches("([0-9]+.[0-9]+)")) {
+    		return TokenClass.FLOAT_LITERAL;
+    	} else if(letter.matches("([0-9]+)")) {
+    		return TokenClass.INTEGER_LITERAL;
+    	} else if(letter.matches("\".*\"")) {
+    		return TokenClass.STRING_LITERAL;
+    	} else if(Keywords.isKeyword(letter)){
             return TokenClass.KEYWORD;
         } else if(Operators.isOperator(letter)){
             return TokenClass.OPERATOR;
@@ -36,5 +45,6 @@ public enum TokenClass {
             return TokenClass.IDENTIFIER;
         }
     }
+    
 
 }

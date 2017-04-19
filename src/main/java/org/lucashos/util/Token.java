@@ -1,5 +1,8 @@
 package org.lucashos.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lucas on 28/02/17.
  */
@@ -15,15 +18,44 @@ public class Token {
         this.value = value;
     }
 
-    public Token(TokenClass tokenClass, String value, int line, int column) {
+    private Token(TokenClass tokenClass, String value, int line, int column) {
         this(tokenClass, value);
         this.line = line;
         this.column = column;
     }
 
-    public Token(TokenClass tokenClass, String value, int line, int column, Integer index) {
+    Token(TokenClass tokenClass, String value, int line, int column, Integer index) {
         this(tokenClass, value, line, column);
         this.index = index;
+    }
+
+    public Boolean isLiteral () {
+        return this.tokenClass.equals(TokenClass.FLOAT_LITERAL) ||
+                this.tokenClass.equals(TokenClass.INTEGER_LITERAL) ||
+                this.tokenClass.equals(TokenClass.STRING_LITERAL);
+    }
+
+    public Boolean isTerminal () {
+        return isLiteral() || isIdentifier();
+    }
+
+    public Boolean isIdentifier() {
+        return this.tokenClass.equals(TokenClass.IDENTIFIER);
+    }
+
+    public Boolean isOperator() {
+        return this.tokenClass.equals(TokenClass.OPERATOR);
+    }
+
+    public Boolean isTipo() {
+        List<String> tipos = new ArrayList<>();
+        tipos.add("nada");
+        tipos.add("int");
+        tipos.add("real");
+        tipos.add("texto");
+        tipos.add("logico");
+
+        return tipos.contains(value);
     }
 
     public TokenClass getTokenClass() {
@@ -65,4 +97,13 @@ public class Token {
     public void setLine(int line) {
         this.line = line;
     }
+
+	@Override
+	public String toString() {
+		return "{ \"tokenClass\": " + "\"" + tokenClass + "\", " + "\"value\": " + "\"" + value + "\"" + ", \"index\":" + index + ", \"column\":" + column
+				+ ", line=" + line + "]";
+	}
+
+	
+    
 }

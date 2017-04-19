@@ -9,7 +9,7 @@ public class Gramar {
     private Alphabet alphabet;
     private List<Rule> rules;
 
-    public Gramar(String Alphabet, List<Rule> rules) {
+    public Gramar(Alphabet alphabet, List<Rule> rules) {
         this.alphabet = alphabet;
         this.rules = rules;
     }
