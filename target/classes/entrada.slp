@@ -1,6 +1,6 @@
-( func teste ( tipo param1 tipo param2 ) nada
+( func teste ( ) nada
 	( int a b c )
-	( = a 0 )
+	( = a b )
 	( = b a )
 	( escreve "oi" )
 	( le a )

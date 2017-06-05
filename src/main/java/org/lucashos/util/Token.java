@@ -100,8 +100,7 @@ public class Token {
 
 	@Override
 	public String toString() {
-		return "{ \"tokenClass\": " + "\"" + tokenClass + "\", " + "\"value\": " + "\"" + value + "\"" + ", \"index\":" + index + ", \"column\":" + column
-				+ ", line=" + line + "]";
+		return value;
 	}
 
 	

@@ -68,7 +68,7 @@ public class TokenTable {
 
 	@Override
 	public String toString() {
-		return "TokenTable [tokens=" + tokens + "]";
+		return "TokenTable [nodes=" + tokens + "]";
 	}
     
     
