@@ -103,6 +103,23 @@ public class Token {
 		return value;
 	}
 
-	
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Token token = (Token) o;
+
+        if (tokenClass != token.tokenClass) return false;
+        if (!value.equals(token.value)) return false;
+        return index.equals(token.index);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = tokenClass.hashCode();
+        result = 31 * result + value.hashCode();
+        result = 31 * result + index.hashCode();
+        return result;
+    }
 }

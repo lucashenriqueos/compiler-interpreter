@@ -214,7 +214,9 @@ public class SyntaticAnalyzer {
             if(lookAhead().isIdentifier()) {
                 node.addChild(ids());
             } else {
-                node.addChild(new Node(token));
+                Node lastId = new Node("ids");
+                lastId.addChild(new Node(token));
+                node.addChild(lastId);
                 readToken();
             }
         } else log(TokenClass.IDENTIFIER.getFriendlyName(), token);

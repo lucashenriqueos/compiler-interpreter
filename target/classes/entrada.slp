@@ -1,7 +1,8 @@
-( func teste ( ) nada
+( func teste ( int asd ) nada
 	( int a b c )
 	( = a b )
 	( = b a )
 	( escreve "oi" )
+	( escreve ( + 1 1 ) )
 	( le a )
 )
