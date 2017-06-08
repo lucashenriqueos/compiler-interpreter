@@ -79,6 +79,7 @@ public class SemanticAnalyzer {
 
     private Object cmds(Node no) {
         if(no.getChildren().size() == 2) {
+            cmd(no.getChild(0));
             return cmds(no.getChild(1));
         } else {
             return cmd(no.getChild(0));
@@ -90,10 +91,25 @@ public class SemanticAnalyzer {
     }
 
     private Object cmdInt(Node no) {
-        if(no.getChildType(0).equals("decl")) {
-            return decl(no.getChild(0));
+        String type = no.getChildType(0);
+        switch (type) {
+            case "decl":
+                return decl(no.getChild(0));
+            case "attrib":
+                return attrib(no.getChild(0));
+            case "leitura":
+                return leitura(no.getChild(0));
+            case "escrita":
+                return escrita(no.getChild(0));
+            case "cond":
+                return cond(no.getChild(0));
+            case "laco":
+                return laco(no.getChild(0));
+            case "invoca":
+                return invoca(no.getChild(0));
+            default:
+                return null;
         }
-        return null;
     }
 
     private Object decl(Node node) {
@@ -124,16 +140,40 @@ public class SemanticAnalyzer {
     }
 
     private Object attrib(Node node) {
+        if(node.getChildType(2).equals("exp")) {
+            String returnType = (String) exp(node.getChild(2));
+            if(table.getSymbolType(1).equals(returnType)) {
+                return returnType;
+            } else log("Attribution differs from variable type", token);
+        } log("expected expression for attribution", token);
         return null;
     }
 
+    //<exp> ::= <operan> | '(' <op> <exp> <exp> ')'
     private Object exp(Node node) {
+        if(node.getChildren().size() == 1) {
+            return operan(node.getChild(0));
+        } else {
+            op(node.getChild(1));
+            exp(node.getChild(2));
+            exp(node.getChild(3));
+        }
         return node;
     }
 
     //<operan> ::= id | cli | cll | cls | clr | '(' <invoca> ')'
     private Object operan(Node node) {
-        return node;
+        if (node.getChildren().size() == 1) {
+            Token token = node.getChild(0).getToken();
+            if (token.isIdentifier()) {
+                return table.getSymbolType(node.getChild(0).getToken().getIndex());
+            } else if (token.isLiteral()) {
+                return token.getLiteral();
+            }
+        }else {
+            return invoca(node.getChild(1));
+        }
+        return null;
     }
 
     //<op> ::= '&' | '|' | '>' | '<' | '>=' | '<=' | '==' | '!=' | '+' | '-' | '*' | '/' | '.'

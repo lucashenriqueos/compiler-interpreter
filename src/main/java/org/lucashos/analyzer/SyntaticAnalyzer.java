@@ -262,7 +262,7 @@ public class SyntaticAnalyzer {
 
     //<operan> ::= id | cli | cll | cls | clr | '(' <invoca> ')'
     private Node operan() {
-        Node node = new Node("opean");
+        Node node = new Node("operan");
         if(token.getValue().equals("(")) {
             node.addChild(new Node(token));
             readToken();

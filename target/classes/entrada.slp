@@ -1,6 +1,6 @@
 ( func teste ( int asd ) nada
 	( int a b c )
-	( = a b )
+	( = a "aaa" )
 	( = b a )
 	( escreve "oi" )
 	( escreve ( + 1 1 ) )

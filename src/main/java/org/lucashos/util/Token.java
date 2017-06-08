@@ -35,6 +35,17 @@ public class Token {
                 this.tokenClass.equals(TokenClass.STRING_LITERAL);
     }
 
+    public String getLiteral() {
+        if(this.tokenClass.equals(TokenClass.FLOAT_LITERAL)){
+            return "real";
+        } else if(this.tokenClass.equals(TokenClass.INTEGER_LITERAL)) {
+            return "int";
+        } else if (this.tokenClass.equals(TokenClass.STRING_LITERAL)) {
+            return "texto";
+        }
+        return "";
+    }
+
     public Boolean isTerminal () {
         return isLiteral() || isIdentifier();
     }
