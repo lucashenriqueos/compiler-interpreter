@@ -214,7 +214,9 @@ public class SyntaticAnalyzer {
             if(lookAhead().isIdentifier()) {
                 node.addChild(ids());
             } else {
-                node.addChild(new Node(token));
+                Node lastId = new Node("ids");
+                lastId.addChild(new Node(token));
+                node.addChild(lastId);
                 readToken();
             }
         } else log(TokenClass.IDENTIFIER.getFriendlyName(), token);
@@ -260,7 +262,7 @@ public class SyntaticAnalyzer {
 
     //<operan> ::= id | cli | cll | cls | clr | '(' <invoca> ')'
     private Node operan() {
-        Node node = new Node("opean");
+        Node node = new Node("operan");
         if(token.getValue().equals("(")) {
             node.addChild(new Node(token));
             readToken();

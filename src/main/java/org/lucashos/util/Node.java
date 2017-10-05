@@ -22,12 +22,6 @@ public class Node {
         children = new ArrayList<>();
     }
 
-    public Node(Token token, Node parent) {
-        this(token);
-        this.parent = parent;
-        parent.addChild(this);
-    }
-
     public void addChild(Node node) {
         this.children.add(node);
         node.setParent(this);
@@ -37,12 +31,20 @@ public class Node {
         this.parent = parent;
     }
 
+    public Node getChild(int index) {
+        return this.children.get(index);
+    }
+
     public List<Node> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Node> children) {
-        this.children = children;
+    public Token getToken() {
+        return token;
+    }
+
+    public String getChildType(int index) {
+        return this.children.get(index).type;
     }
 
     @Override

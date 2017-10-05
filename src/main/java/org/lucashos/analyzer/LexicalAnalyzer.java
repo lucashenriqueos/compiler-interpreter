@@ -15,11 +15,10 @@ import java.util.regex.Pattern;
  */
 public class LexicalAnalyzer {
 
-    private static TokenTable nextLine(String line, Integer lineNumber){
-        TokenTable tokenTable = new TokenTable();
-
+    private static TokenTable nextLine(String line, Integer lineNumber, TokenTable tokenTable){
         List<String> list = new ArrayList<String>();
         Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(line);
+
         while (m.find())
             list.add(m.group(1)); // Add .replace("\"", "") to remove surrounding quotes.
 
@@ -33,12 +32,11 @@ public class LexicalAnalyzer {
     }
 
     public static TokenTable createTable(List<String> lines) {
-
         TokenTable table = new TokenTable();
 
         AtomicInteger index = new AtomicInteger(0);
         lines.forEach(l -> {
-            table.addAll(LexicalAnalyzer.nextLine(l, index.intValue()).getTokens());
+            LexicalAnalyzer.nextLine(l, index.intValue(), table);
             index.addAndGet(1);
         });
 
